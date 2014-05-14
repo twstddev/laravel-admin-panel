@@ -1,6 +1,14 @@
 <?php
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase {
+	/**
+	 * @brief Makes default preparation.
+	 */
+	public function setUp() {
+		parent::setUp();
+
+		Artisan::call( 'migrate' );
+	}
 
 	/**
 	 * Creates the application.
