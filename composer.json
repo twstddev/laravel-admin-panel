@@ -33,6 +33,9 @@
 		"preferred-install": "dist"
 	},
 	"minimum-stability": "stable",
+	"require" : {
+		"laravelbook/ardent" : "dev-master"
+	},
 	"require-dev" : {
 		"phpunit/phpunit" : "*"
 	}
