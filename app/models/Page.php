@@ -13,6 +13,15 @@ class Page extends Ardent {
 		parent::__construct( $attributes );
 	}
 
+	/**
+	 * @brief Returns a list of allowed templates.
+	 */
+	public static function templates() {
+		return array(
+			'home' => 'Home'
+		);
+	}
+
 	public static $sluggable = array(
 		'build_from' => 'title',
 		'save_to' => 'slug'
@@ -20,7 +29,8 @@ class Page extends Ardent {
 
 	public static $rules = array(
 		'title' => 'required',
-		'slug' => 'required|unique:pages'
+		'slug' => 'required|unique:pages',
+		'template' => 'template'
 	);
 
 	protected $fillable = array(
