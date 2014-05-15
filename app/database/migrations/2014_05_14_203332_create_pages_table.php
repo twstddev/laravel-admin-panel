@@ -17,9 +17,9 @@ class CreatePagesTable extends Migration {
 			$table->increments('id');
 			$table->string( 'title' );
 			$table->string( 'slug' )->unique( 'slug' );
-			$table->text( 'body' );
-			$table->text( 'properties' );
-			$table->string( 'template' );
+			$table->text( 'body' )->nullable();
+			$table->text( 'properties' )->nullable();
+			$table->string( 'template' )->nullable();
 			$table->timestamps();
 		});
 	}
