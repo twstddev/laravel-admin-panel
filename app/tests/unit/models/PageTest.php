@@ -3,7 +3,7 @@ class PageTest extends TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->page = new Page( array(
+		$this->m_page = new Page( array(
 			'title' => 'Home',
 			'slug' => '/',
 			'template' => 'home'
@@ -11,34 +11,34 @@ class PageTest extends TestCase {
 	}
 
 	public function testRequiresTitle() {
-		$this->page->title = '';
+		$this->m_page->title = '';
 
-		$this->assertFalse( $this->page->save() );
+		$this->assertFalse( $this->m_page->save() );
 
-		$errors = $this->page->errors()->all();
+		$errors = $this->m_page->errors()->all();
 		$this->assertCount( 1, $errors );
 	}
 
 	public function testGeneratesDefaultSlug() {
-		$this->page->slug = '';
-		$this->page->save();
-		Sluggable::make( $this->page, true );
+		$this->m_page->slug = '';
+		$this->m_page->save();
+		Sluggable::make( $this->m_page, true );
 
-		$this->assertEquals( 'home', $this->page->slug );
+		$this->assertEquals( 'home', $this->m_page->slug );
 	}
 
 	public function testAllowsCustomSlug() {
 		$custom_slug = 'my-custom';
 
-		$this->page->slug = $custom_slug;
-		$this->page->save();
+		$this->m_page->slug = $custom_slug;
+		$this->m_page->save();
 
 		$this->assertNotEquals( Page::whereSlug( $custom_slug )->first(), false );
 	}
 
 	public function testUniqueSlug() {
-		$this->page->slug = 'home';
-		$this->page->save();
+		$this->m_page->slug = 'home';
+		$this->m_page->save();
 
 		$another_page = new Page( array(
 			'title' => 'Another page',
@@ -52,24 +52,24 @@ class PageTest extends TestCase {
 	}
 
 	public function testAllowedTemplate() {
-		$this->page->template = 'about';
+		$this->m_page->template = 'about';
 
-		$this->assertFalse( $this->page->save() );
+		$this->assertFalse( $this->m_page->save() );
 
-		$errors = $this->page->errors()->all();
+		$errors = $this->m_page->errors()->all();
 		$this->assertCount( 1, $errors );
 	}
 
 	public function testSavedProperties() {
-		$this->page->meta = $this->properties;
-		$this->page->save();
+		$this->m_page->meta = $this->m_properties;
+		$this->m_page->save();
 
 		$current_page = Page::whereSlug( '/' )->first();
-		$this->assertEquals( $current_page->meta, $this->properties );
+		$this->assertEquals( $current_page->meta, $this->m_properties );
 	}
 
-	protected $page = null;
-	protected $properties = array(
+	protected $m_page = null;
+	protected $m_properties = array(
 		'meta_field' => 'value'
 	);
 }
