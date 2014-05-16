@@ -6,7 +6,7 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"laravelbook/ardent" : "dev-master",
-		"cviebrock/eloquent-sluggable" : "1.0.*"
+		"zizaco/entrust": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
