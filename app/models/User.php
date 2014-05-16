@@ -81,4 +81,13 @@ class User extends Ardent implements UserInterface, RemindableInterface {
 		return $this->email;
 	}
 
+	protected $fillable = array(
+		'username',
+		'email',
+		'password',
+		'password_confirmation',
+		'first_name',
+		'last_name'
+	);
+
 }
