@@ -8,7 +8,7 @@ class MenuItemTest extends TestCase {
 			'url' => 'home'
 		) );
 
-		$this->m_gallery_item = new MenutItem( array(
+		$this->m_gallery_item = new MenuItem( array(
 			'title' => 'Gallery',
 			'url' => 'gallery'
 		) );
@@ -26,7 +26,7 @@ class MenuItemTest extends TestCase {
 	public function testRequriesUrl() {
 		$this->m_home_item->url = '';
 
-		$this->assertFalse( $this->m_home_item->save );
+		$this->assertFalse( $this->m_home_item->save() );
 
 		$errors = $this->m_home_item->errors()->all();
 		$this->assertCount( 1, $errors );
@@ -42,8 +42,9 @@ class MenuItemTest extends TestCase {
 	public function testContainsChildrend() {
 		$this->m_home_item->save();
 		$this->m_gallery_item->parent()->associate( $this->m_home_item );
+		$this->m_gallery_item->save();
 
-		$this->assertequals( $this->m_home_item->children()->first()->id, $this->m_gallery_item->id );
+		$this->assertEquals( $this->m_home_item->children()->first()->id, $this->m_gallery_item->id );
 	}
 
 	protected $m_home_item = null;

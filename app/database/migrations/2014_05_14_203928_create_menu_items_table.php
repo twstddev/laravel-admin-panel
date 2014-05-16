@@ -17,8 +17,8 @@ class CreateMenuItemsTable extends Migration {
 			$table->increments('id');
 			$table->string( 'title' );
 			$table->string( 'url' );
-			$table->integer( 'parent_id' )->unsigned();
-			$table->integer( 'position' );
+			$table->integer( 'parent_id' )->unsigned()->nullable();
+			$table->integer( 'position' )->nullable();
 			$table->timestamps();
 		});
 	}
