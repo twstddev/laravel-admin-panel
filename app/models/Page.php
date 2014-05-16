@@ -22,6 +22,14 @@ class Page extends Ardent {
 		);
 	}
 
+	public function getMetaAttribute( $meta ) {
+		return json_decode( $this->properties, true );
+	}
+
+	public function setMetaAttribute( $meta ) {
+		$this->properties = json_encode( $meta );
+	}
+
 	public static $sluggable = array(
 		'build_from' => 'title',
 		'save_to' => 'slug'

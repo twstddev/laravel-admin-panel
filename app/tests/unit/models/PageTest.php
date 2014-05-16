@@ -22,8 +22,9 @@ class PageTest extends TestCase {
 	public function testGeneratesDefaultSlug() {
 		$this->page->slug = '';
 		$this->page->save();
+		Sluggable::make( $this->page, true );
 
-		$this->assertEquals( 'home', $this->page->slug );
+		$this->assertEquals( 'home', Page::whereSlug( 'home' )->first()->slug );
 	}
 
 	public function testAllowsCustomSlug() {
