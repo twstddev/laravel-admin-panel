@@ -24,7 +24,7 @@ class PageTest extends TestCase {
 		$this->page->save();
 		Sluggable::make( $this->page, true );
 
-		$this->assertEquals( 'home', Page::whereSlug( 'home' )->first()->slug );
+		$this->assertEquals( 'home', $this->page->slug );
 	}
 
 	public function testAllowsCustomSlug() {

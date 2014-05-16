@@ -23,17 +23,20 @@ class Page extends Ardent {
 	}
 
 	public function getMetaAttribute( $meta ) {
-		return json_decode( $this->properties, true );
+		return json_decode( $this->attributes[ 'properties' ], true );
 	}
 
 	public function setMetaAttribute( $meta ) {
-		$this->properties = json_encode( $meta );
+		$this->attributes[ 'properties' ] = json_encode( $meta );
 	}
 
-	public static $sluggable = array(
-		'build_from' => 'title',
-		'save_to' => 'slug'
-	);
+	public function setSlugAttribute( $slug ) {
+		if ( empty( $slug ) ) {
+			$slug = Str::slug( $this->title );
+		}
+
+		$this->attributes[ 'slug' ] = $slug;
+	}
 
 	public static $rules = array(
 		'title' => 'required',
