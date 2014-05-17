@@ -120,6 +120,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
+		'Cviebrock\EloquentSluggable\SluggableServiceProvider',
 	),
 
 	/*

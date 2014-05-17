@@ -1,10 +1,12 @@
 <?php 
 use \LaravelBook\Ardent\Ardent;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
 /**
  * @brief Implements a Page object.
  */
-class Page extends Ardent {
+class Page extends Ardent implements SluggableInterface {
 	/**
 	 * @brief Constructor that adds custom validation
 	 * to make sure that given template is allowed.
@@ -38,6 +40,10 @@ class Page extends Ardent {
 		$this->attributes[ 'slug' ] = $slug;
 	}
 
+	public function beforeValidate() {
+		$this->sluggify();
+	}
+
 	public static $rules = array(
 		'title' => 'required',
 		'slug' => 'required|unique:pages',
@@ -51,4 +57,11 @@ class Page extends Ardent {
 		'body',
 		'meta'
 	);
+
+	protected $sluggable = array(
+		'build_from' => 'title',
+		'save_to' => 'slug'
+	);
+
+	use SluggableTrait;
 }
