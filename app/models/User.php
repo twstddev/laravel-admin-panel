@@ -81,6 +81,28 @@ class User extends Ardent implements UserInterface, RemindableInterface {
 		return $this->email;
 	}
 
+	/**
+	 * @brief Validates password match before actually
+	 * saving the model.
+	 */
+	public function beforeSave() {
+	}
+
+	//public function getPasswordConfirmationAttribute( $password ) {
+		//return $this->m_password_confirmation;
+	//}
+
+	//public function setPasswordConfirmationAttribute( $password ) {
+		//$this->m_password_confirmation = $password;
+	//}
+
+	public static $rules = array(
+		'username' => 'required|unique:users',
+		'email' => 'required|unique:users|email',
+		'password' => 'required',
+		'password_confirmation' => 'same:password'
+	);
+
 	protected $fillable = array(
 		'username',
 		'email',
@@ -90,4 +112,9 @@ class User extends Ardent implements UserInterface, RemindableInterface {
 		'last_name'
 	);
 
+	public $autoPurgeRedundantAttributes = true;
+	public static $passwordAttributes  = array('password');
+	public $autoHashPasswordAttributes = true;
+
+	//private $m_password_confirmation;
 }

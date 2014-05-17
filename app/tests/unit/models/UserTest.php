@@ -68,7 +68,7 @@ class UserTest extends TestCase {
 		$this->assertFalse( $this->m_user->save() );
 
 		$errors = $this->m_user->errors()->all();
-		$this->assertCount( 1, $errors );
+		$this->assertGreaterThan( 0, $errors );
 	}
 
 	public function testConfirmsPassword() {
