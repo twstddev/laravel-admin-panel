@@ -3,6 +3,7 @@
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use \LaravelBook\Ardent\Ardent;
+use Zizaco\Entrust\HasRole;
 
 class User extends Ardent implements UserInterface, RemindableInterface {
 
@@ -88,14 +89,6 @@ class User extends Ardent implements UserInterface, RemindableInterface {
 	public function beforeSave() {
 	}
 
-	//public function getPasswordConfirmationAttribute( $password ) {
-		//return $this->m_password_confirmation;
-	//}
-
-	//public function setPasswordConfirmationAttribute( $password ) {
-		//$this->m_password_confirmation = $password;
-	//}
-
 	public static $rules = array(
 		'username' => 'required|unique:users',
 		'email' => 'required|unique:users|email',
@@ -115,6 +108,5 @@ class User extends Ardent implements UserInterface, RemindableInterface {
 	public $autoPurgeRedundantAttributes = true;
 	public static $passwordAttributes  = array('password');
 	public $autoHashPasswordAttributes = true;
-
-	//private $m_password_confirmation;
+	use HasRole;
 }
