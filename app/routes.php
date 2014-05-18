@@ -15,3 +15,16 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+
+Route::group( array( 
+	'prefix' => 'admin',
+	'before' => 'auth',
+	'namespace' => 'Admin'
+	), function() {
+	Route::get( '/', 'PageController@index' );
+
+	Route::resource( 'pages', 'PageController' );
+} );
+
+Route::when( '*', 'csrf', array( 'post' ) );
