@@ -10,7 +10,9 @@ class PageController extends \BaseController {
 	 */
 	public function index()
 	{
-		return 'Admin pages';
+		$pages = \Page::orderBy( 'title', 'ASC' )->get();
+		return \View::make( 'admin.pages.index' )
+			->with( 'pages', $pages );
 	}
 
 
@@ -21,7 +23,10 @@ class PageController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$page = new \Page();
+
+		return \View::make( 'admin.pages.create' )
+			->with( 'page', $page );
 	}
 
 
@@ -32,7 +37,17 @@ class PageController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$page = new \Page( \Input::all() );
+
+		if ( $page->save() ) {
+			\Session::flash( 'success', 'A page has been created' );
+			return \Redirect::route( 'admin.pages.edit', array( 'page' => $page->id ) );
+		}
+		else {
+			return \Redirect::route( 'admin.pages.create' )
+				->withErrors( $page )
+				->withInput();
+		}
 	}
 
 
@@ -42,9 +57,9 @@ class PageController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show( $id )
 	{
-		//
+		return \Redirect::route( 'admin.pages.edit', array( $id ) );
 	}
 
 
@@ -56,7 +71,9 @@ class PageController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$page = \Page::find( $id );
+		return \View::make( 'admin.pages.edit' )
+			->with( 'page', $page );
 	}
 
 
@@ -68,7 +85,17 @@ class PageController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$page = \Page::find( $id );
+
+		if ( $page->update( \Input::all() ) ) {
+			\Session::flash( 'success', 'A page has been updated.' );
+			return \Redirect::route( 'admin.pages.edit', array( $id ) );
+		}
+		else {
+			return \Redirect::route( 'admin.pages.edit' )
+				->withErrors( $page )
+				->withInput();
+		}
 	}
 
 
@@ -80,7 +107,11 @@ class PageController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$page = \Page::find( $id );
+		$page->delete();
+
+		\Session::flash( 'success', 'A page has been deleted.' );
+		return \Redirect::route( 'admin.pages.index' );
 	}
 
 

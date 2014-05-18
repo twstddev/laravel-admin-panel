@@ -3,12 +3,13 @@ class PageControllerTest extends TestCase {
 	public function setUp() {
 		parent::setUp();
 		$this->m_page = Page::create( array(
-			'title' => 'Home'
+			'title' => 'Home',
+			'slug' => ''
 		) );
 	}
 
 	public function testIndex() {
-		$this->call( 'GET', 'admin/pages' );
+		$this->action( 'GET', 'admin.pages.index' );
 
 		$this->assertResponseOk();
 		$this->assertViewHas( 'pages' );
@@ -24,42 +25,43 @@ class PageControllerTest extends TestCase {
 
 	public function testStore() {
 		$this->call( 'POST', 'admin/pages', array(
-			'title' => 'About'
+			'title' => 'About',
+			'slug' => ''
 		) );
 
-		$this->assertResponseOk();
-		$this->assertEquals( 2, Post::all()->count() );
+		$this->assertSessionHas( 'success' );
+		$this->assertEquals( 1, Page::whereSlug( 'about' )->count() );
 	}
 
 	public function testShow() {
-		$this->call( 'GET', 'admin/pages/' + $this->m_page->id );
+		$this->action( 'GET', 'admin.pages.show', array( $this->m_page->id ) );
 
-		$this->assertResponseOk();
-		$this->assertViewHas( 'page', $this->m_page );
+		$this->assertRedirectedToAction( 'admin.pages.edit', array( $this->m_page->id ) );
 	}
 
 	public function testEdit() {
-		$this->call( 'GET' ,'admin/pages' + $this->m_page->id + '/edit' );
+		$this->action( 'GET', 'admin.pages.edit', array( $this->m_page->id ) );
 
 		$this->assertResponseOk();
-		$this->assertViewHas( 'page', $this->m_page );
+		$this->assertViewHas( 'page', Page::find( $this->m_page->id ) );
 	}
 
 	public function testUpdate() {
-		$this->call( 'PUT', 'admin/pages/' + $this->m_page->id, array( 
+		$this->action( 'PUT', 'admin.pages.update', array( $this->m_page->id ), array( 
 			'title' => 'Home',
 			'slug' => 'about'
 	   	) );
 
-		$this->assertResponseOk();
+		$this->assertSessionHas( 'success' );
 		$this->assertEquals( 1, Page::whereSlug( 'about' )->count() );
 	}
 
 	public function testDestroy() {
-		$this->call( 'DELETE', 'admin/pages/' + $this-m_page->id );
+		$this->action( 'DELETE', 'admin.pages.destroy', array( $this->m_page->id ) );
 
-		$this->assertResponseOk();
 		$this->assertEquals( 0, Page::all()->count() );
+		$this->assertSessionHas( 'success' );
+		$this->assertRedirectedToRoute( 'admin.pages.index' );
 	}
 
 
