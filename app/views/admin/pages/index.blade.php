@@ -39,7 +39,9 @@
 				<td>
 					{{ link_to_route( 'admin.pages.edit', 'Home', array( $page->id ) ) }}
 				</td>
-				<td>/</td>
+				<td>
+					{{ $page->slug }}
+				</td>
 				<td class="actions">
 					<a class="btn btn-xs btn-warning" href="{{ route( 'admin.pages.edit', array( $page->id ) ) }}">
 						<i class="glyphicon glyphicon-pencil"></i> 
