@@ -45,6 +45,13 @@ Route::group( array(
 			'show'
 		)
 	) );
+
+	Route::resource( 'menu_items', 'MenuItemController', array(
+		'only' => array(
+			'index',
+			'show'
+		)
+	) );
 } );
 
 Route::when( '*', 'csrf', array( 'post' ) );
