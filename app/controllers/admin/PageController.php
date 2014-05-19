@@ -92,7 +92,7 @@ class PageController extends \BaseController {
 			return \Redirect::route( 'admin.pages.edit', array( $id ) );
 		}
 		else {
-			return \Redirect::route( 'admin.pages.edit' )
+			return \Redirect::route( 'admin.pages.edit', array( $id ) )
 				->withErrors( $page )
 				->withInput();
 		}

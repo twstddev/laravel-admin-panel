@@ -71,7 +71,7 @@ class MenuItemControllerTest extends TestCase {
 	public function testDestroy() {
 		$this->action( 'DELETE', 'admin.menu_items.destroy', array( $this->m_first_item->id ) );
 
-		$this->assertFalse( MenuItem::find( $this->m_first_item->id ) );
+		$this->assertNull( MenuItem::find( $this->m_first_item->id ) );
 		$this->assertSessionHas( 'success' );
 		$this->assertRedirectedToAction( 'admin.menu_items.index' );
 	}
@@ -79,27 +79,22 @@ class MenuItemControllerTest extends TestCase {
 	public function testSort() {
 		$this->action( 'POST', 'admin.menu_items.sort', array(), array(
 			'items' => array(
-				'id' => $this->m_first_item->id,
-				'children' => array(
-					'0' => array(
-						'id' => $this->m_second_item->id
-					),
-					'1' => array( 
-						'id' => $this->m_third_item->id
-				   	)
+				array(
+					'id' => $this->m_first_item->id,
+					'children' => array(
+						'0' => array(
+							'id' => $this->m_second_item->id
+						),
+						'1' => array( 
+							'id' => $this->m_third_item->id
+						)
+					)
 				)
 			)
 		) );
+
+		$this->assertEquals( $this->m_first_item->id, MenuItem::find( $this->m_second_item->id )->parent->id );
 	}
-
-	public function testSortAccess() {
-		Route::enableFilters();
-
-		$this->action( 'POST', 'admin.menu_items.sort', array(), array() );
-
-		$this->assertRedirectToAction( 'login' );
-	}
-
 
 	private $m_first_item = null;
 	private $m_second_item = null;

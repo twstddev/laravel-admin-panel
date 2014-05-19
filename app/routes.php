@@ -26,6 +26,10 @@ Route::group( array(
 
 	Route::resource( 'pages', 'PageController' );
 	Route::resource( 'menu_items', 'MenuItemController' );
+	Route::post( 'menu_items/sort', array(
+		'uses' => 'MenuItemController@sort',
+		'as' => 'admin.menu_items.sort'
+	) );
 } );
 
 Route::when( '*', 'csrf', array( 'post' ) );
