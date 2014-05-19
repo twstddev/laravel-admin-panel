@@ -1,7 +1,7 @@
 <?php
 namespace Admin;
 
-class PageController extends \BaseController {
+class PageController extends AdminController {
 
 	/**
 	 * Display a listing of the resource.
@@ -11,7 +11,7 @@ class PageController extends \BaseController {
 	public function index()
 	{
 		$pages = \Page::orderBy( 'title', 'ASC' )->get();
-		return \View::make( 'admin.pages.index' )
+		$this->layout->content = \View::make( 'admin.pages.index' )
 			->with( 'pages', $pages );
 	}
 

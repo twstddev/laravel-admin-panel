@@ -46,6 +46,9 @@ class SessionController extends BaseController {
 	 * @brief Logs out current user.
 	 */
 	public function logOut() {
+		Auth::logout();
+
+		return Redirect::route( 'login.get' );
 	}
 
 	protected $layout = 'layouts.general';
