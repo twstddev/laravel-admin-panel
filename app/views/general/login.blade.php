@@ -7,13 +7,18 @@
 			<h3 class="panel-title">Admin Panel</h3>
 		</div>
 		<div class="panel-body">
-			{{ Form::open( array( 'route' => 'login.get' ) ) }}
-				@if ( Session::has( 'errors' ) )
-					@foreach ( Session::get( 'errors' ) as $error )
+			{{ Form::open( array( 'route' => 'login.post' ) ) }}
+				@if ( $errors->count() )
+					@foreach ( $errors->all() as $error )
 					<p class="alert alert-danger">
 						{{ $error }}
 					</p>
 					@endforeach
+				@endif
+				@if ( Session::has( 'error' ) )
+					<p class="alert alert-danger">
+						{{ Session::get( 'error' ) }}
+					</p>
 				@endif
 				<div class="form-group">
 					{{ Form::label( 'username', 'Username:' ) }}
