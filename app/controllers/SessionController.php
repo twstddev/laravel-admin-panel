@@ -18,4 +18,6 @@ class SessionController extends BaseController {
 	 */
 	public function logOut() {
 	}
+
+	protected $layout = 'layouts.general';
 }
