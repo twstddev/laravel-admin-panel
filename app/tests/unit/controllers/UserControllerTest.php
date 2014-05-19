@@ -45,7 +45,7 @@ class UserControllerTest extends TestCase {
 	}
 
 	public function testEdit() {
-		$this->action( 'admin.users.edit', array( $this->m_user->id ) );
+		$this->action( 'GET', 'admin.users.edit', array( $this->m_user->id ) );
 
 		$this->assertResponseOk();
 		$this->assertViewHas( 'user', User::find( $this->m_user->id ) );

@@ -26,6 +26,7 @@ Route::group( array(
 
 	Route::resource( 'pages', 'PageController' );
 	Route::resource( 'menu_items', 'MenuItemController' );
+	Route::resource( 'users', 'UserController' );
 	Route::post( 'menu_items/sort', array(
 		'uses' => 'MenuItemController@sort',
 		'as' => 'admin.menu_items.sort'
