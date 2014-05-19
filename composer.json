@@ -38,6 +38,5 @@
 	"minimum-stability": "stable",
 	"require-dev" : {
 		"phpunit/phpunit" : "*",
-		"panique/laravel-sass": "dev-master"
 	}
 }
