@@ -54,4 +54,19 @@ Route::group( array(
 	) );
 } );
 
+Route::get( 'login', array(
+	'uses' => 'SessionController@getLogin',
+	'as' => 'login.get'
+) );
+
+Route::post( 'login', array(
+	'uses' => 'SessionController@postLogin',
+	'as' => 'login.post'
+) );
+
+Route::delete( 'logout', array(
+	'uses' => 'SessionController@logOut',
+	'as' => 'logout'
+) );
+
 Route::when( '*', 'csrf', array( 'post' ) );

@@ -30,6 +30,4 @@ class MenuItemController extends \BaseController {
 
 		return \Response::json( $menu_item );
 	}
-
-
 }
