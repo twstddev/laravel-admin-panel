@@ -9,5 +9,6 @@ namespace Admin;
  * against
  */
 function is_active_controller( $controller_name ) {
-	return ( \Request::is( 'admin/' . $controller_name  ) ) ? 'active' : '';
+	//return ( \Request::is( 'admin/' . $controller_name  ) ) ? 'active' : '';
+	return '';
 }
