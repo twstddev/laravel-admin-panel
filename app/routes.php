@@ -25,6 +25,7 @@ Route::group( array(
 	Route::get( '/', 'PageController@index' );
 
 	Route::resource( 'pages', 'PageController' );
+	Route::resource( 'menu_items', 'MenuItemController' );
 } );
 
 Route::when( '*', 'csrf', array( 'post' ) );
