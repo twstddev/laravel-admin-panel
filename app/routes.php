@@ -33,4 +33,18 @@ Route::group( array(
 	) );
 } );
 
+Route::group( array(
+	'prefix' => 'api',
+	'namespace' => 'Api'
+	), function() {
+	Route::get( '/', 'PageController@index' );
+
+	Route::resource( 'pages', 'PageController', array(
+		'only' => array(
+			'index',
+			'show'
+		)
+	) );
+} );
+
 Route::when( '*', 'csrf', array( 'post' ) );
