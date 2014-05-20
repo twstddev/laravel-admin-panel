@@ -20,6 +20,7 @@ class Page extends Ardent implements SluggableInterface {
 	 */
 	public static function templates() {
 		return array(
+			'' => '',
 			'home' => 'Home'
 		);
 	}
@@ -46,7 +47,7 @@ class Page extends Ardent implements SluggableInterface {
 
 	public static $rules = array(
 		'title' => 'required',
-		'slug' => 'required|unique:pages',
+		'slug' => 'required',
 		'template' => 'template'
 	);
 

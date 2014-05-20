@@ -37,7 +37,7 @@
 			@foreach ( $pages as $page )
 			<tr>
 				<td>
-					{{ link_to_route( 'admin.pages.edit', 'Home', array( $page->id ) ) }}
+					{{ link_to_route( 'admin.pages.edit', $page->title, array( $page->id ) ) }}
 				</td>
 				<td>
 					{{ $page->slug }}
@@ -48,7 +48,7 @@
 						Edit
 					</a>
 
-					{{ Form::open( array( 'route' => 'admin.pages.destroy', 'method' => 'delete' ) ) }}
+					{{ Form::open( array( 'route' => array( 'admin.pages.destroy', $page->id ), 'method' => 'delete' ) ) }}
 					{{ Form::button( '<i class="glyphicon glyphicon-trash"></i> Delete', array( 'type' => 'submit', 'class' => 'btn btn-danger btn-xs' )) }}
 					{{ Form::close() }}
 				</td>

@@ -25,7 +25,7 @@ class PageController extends AdminController {
 	{
 		$page = new \Page();
 
-		return \View::make( 'admin.pages.create' )
+		$this->layout->content =  \View::make( 'admin.pages.create' )
 			->with( 'page', $page );
 	}
 
@@ -45,7 +45,7 @@ class PageController extends AdminController {
 		}
 		else {
 			return \Redirect::route( 'admin.pages.create' )
-				->withErrors( $page )
+				->withErrors( $page->errors() )
 				->withInput();
 		}
 	}
@@ -72,7 +72,7 @@ class PageController extends AdminController {
 	public function edit($id)
 	{
 		$page = \Page::find( $id );
-		return \View::make( 'admin.pages.edit' )
+		$this->layout->content =  \View::make( 'admin.pages.edit' )
 			->with( 'page', $page );
 	}
 
@@ -93,7 +93,7 @@ class PageController extends AdminController {
 		}
 		else {
 			return \Redirect::route( 'admin.pages.edit', array( $id ) )
-				->withErrors( $page )
+				->withErrors( $page->errors() )
 				->withInput();
 		}
 	}
