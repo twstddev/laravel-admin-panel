@@ -10,7 +10,17 @@ class PageController extends AdminController {
 	 */
 	public function index()
 	{
-		$pages = \Page::orderBy( 'title', 'ASC' )->get();
+		$pages = null;
+
+		if ( \Input::has( 's' ) && !empty( \Input::get( 's' ) ) ) {
+			$search = \Input::get( 's' );
+
+			$pages = \Page::where( 'title', 'LIKE', "%{$search}%" )->orderBy( 'title', 'ASC' )->get();
+		}
+		else {
+			$pages = \Page::orderBy( 'title', 'ASC' )->get();
+		}
+
 		$this->layout->content = \View::make( 'admin.pages.index' )
 			->with( 'pages', $pages );
 	}
