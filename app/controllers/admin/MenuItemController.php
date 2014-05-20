@@ -26,7 +26,7 @@ class MenuItemController extends AdminController {
 	{
 		$menu_item = new \MenuItem();
 
-		return \View::make( 'admin.menu_items.create' )
+		$this->layout->content =  \View::make( 'admin.menu_items.create' )
 			->with( 'menu_item', $menu_item );
 	}
 
@@ -46,7 +46,7 @@ class MenuItemController extends AdminController {
 		}
 		else {
 			return \Redirect::route( 'admin.menu_items.create' )
-				->withErrors( $menu_item )
+				->withErrors( $menu_item->errors() )
 				->withInput();
 		}
 	}
@@ -74,7 +74,7 @@ class MenuItemController extends AdminController {
 	{
 		$menu_item = \MenuItem::find( $id );
 
-		return \View::make( 'admin.menu_items.edit' )
+		$this->layout->content =  \View::make( 'admin.menu_items.edit' )
 			->with( 'menu_item', $menu_item );
 	}
 
@@ -95,7 +95,7 @@ class MenuItemController extends AdminController {
 		}
 		else {
 			return \Redirect::route( 'admin.menu_items.edit', array( $id ) )
-				->withErrors( $menu_item )
+				->withErrors( $menu_item->error() )
 				->withInput();
 		}
 	}
