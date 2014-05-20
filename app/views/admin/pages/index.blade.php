@@ -55,32 +55,5 @@
 		</tbody>
 	</table>
 </section>
-<ul class="pagination">
-		<li class="disabled">
-			<a href="#">
-				&laquo;
-			</a>
-		</li>
-		<li class="active">
-			<a href="#">
-				1
-				<span class="sr-only">(current)</span>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				2
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				3
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				&raquo;
-			</a>
-		</li>
-	</ul>
+{{ $pages->links() }}
 @stop

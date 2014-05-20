@@ -15,11 +15,13 @@ class PageController extends AdminController {
 		if ( \Input::has( 's' ) && !empty( \Input::get( 's' ) ) ) {
 			$search = \Input::get( 's' );
 
-			$pages = \Page::where( 'title', 'LIKE', "%{$search}%" )->orderBy( 'title', 'ASC' )->get();
+			$pages = \Page::where( 'title', 'LIKE', "%{$search}%" )->orderBy( 'title', 'ASC' );
 		}
 		else {
-			$pages = \Page::orderBy( 'title', 'ASC' )->get();
+			$pages = \Page::orderBy( 'title', 'asc' );
 		}
+
+		$pages = $pages->paginate( 10 );
 
 		$this->layout->content = \View::make( 'admin.pages.index' )
 			->with( 'pages', $pages );
