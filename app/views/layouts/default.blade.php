@@ -16,5 +16,7 @@
 
 	{{ HTML::script( 'js/jquery.nestedsortable.js' ) }}
 	{{ HTML::script( 'js/shared/custom_sortable.js' ) }}
+	{{ HTML::script( 'js/tinymce/tinymce.min.js' ) }}
+	{{ HTML::script( 'js/shared/admin.js' ) }}
 </body>
 </html>

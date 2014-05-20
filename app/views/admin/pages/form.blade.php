@@ -26,7 +26,7 @@
 				</div>
 				<div class="form-group">
 					{{ Form::label( 'body', 'Body:' ) }}
-					{{ Form::textarea( 'body', null, array( 'class' => 'form-control', 'rows' => 15 ) ) }}
+					{{ Form::textarea( 'body', null, array( 'class' => 'form-control rich-editor', 'rows' => 15 ) ) }}
 				</div>
 				<h3>Extra</h3>
 			</div>
