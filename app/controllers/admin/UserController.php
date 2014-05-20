@@ -1,7 +1,7 @@
 <?php
 namespace Admin;
 
-class UserController extends \BaseController {
+class UserController extends AdminController {
 
 	/**
 	 * Display a listing of the resource.
@@ -12,7 +12,7 @@ class UserController extends \BaseController {
 	{
 		$users = \User::all();
 
-		return \View::make( 'admin.users.index' )
+		$this->layout->content = \View::make( 'admin.users.index' )
 			->with( 'users', $users );
 	}
 
