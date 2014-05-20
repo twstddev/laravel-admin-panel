@@ -14,14 +14,12 @@
 			<i class="glyphicon glyphicon-file"></i>
 			Add new
 		</a>
-		<form class="search-form input-group pull-right" action="#">
-			<input class="search-input form-control" type="text" placeholder="Search..." />
+		{{ Form::open( array( 'route' => array( 'admin.users.index' ), 'method' => 'get', 'class' => 'search-form input-group pull-right' ) ) }}
+			{{ Form::text( 's', Input::get( 's' ), array( 'class' => 'search-input form-control', 'placeholder' => 'Search...' )) }}
 			<span class="input-group-btn">
-				<button class="btn btn-primary" type="submit">
-					<i class="glyphicon glyphicon-search"></i>
-				</button>
+				{{ Form::button( '<i class="glyphicon glyphicon-search"></i>', array( 'class' => 'btn btn-primary', 'type' => 'submit' ) ) }}
 			</span>
-		</form>
+		{{ Form::close() }}
 		<div class="clearfix"></div>
 	</div>
 	<table class="table table-striped table-hover admin-table">

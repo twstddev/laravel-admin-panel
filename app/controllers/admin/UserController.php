@@ -10,7 +10,16 @@ class UserController extends AdminController {
 	 */
 	public function index()
 	{
-		$users = \User::all();
+		$users = null;
+
+		if ( \Input::has( 's' ) && !empty( \Input::get( 's' ) ) ) {
+			$search = \Input::get( 's' );
+
+			$users = \User::where( 'username', 'LIKE', "%{$search}%" )->get();
+		}
+		else {
+			$users = \User::all();
+		}
 
 		$this->layout->content = \View::make( 'admin.users.index' )
 			->with( 'users', $users );
