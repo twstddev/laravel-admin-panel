@@ -16,7 +16,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li>
-								<a href="#"><i class="glyphicon glyphicon-user"></i> My Profile</a>
+								<a href="{{ route( 'admin.users.edit', Auth::user()->id ) }}"><i class="glyphicon glyphicon-user"></i> My Profile</a>
 							</li>
 							<li class="divider"></li>
 							<li>
