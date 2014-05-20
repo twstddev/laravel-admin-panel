@@ -19,7 +19,7 @@ class MenuItem extends Ardent {
 	 * direct children of the current item.
 	 */
 	public function children() {
-		return $this->hasMany( 'MenuItem', 'parent_id' );
+		return $this->hasMany( 'MenuItem', 'parent_id' )->orderBy( 'position', 'ASC' );
 	}
 
 	public static $rules = array(

@@ -4,3 +4,15 @@ html{font-size:12px}.grid-l-1{float:left;width:8.33333%}.grid-l-2{float:left;wid
 	float: left;
 	margin-right: 1em;
 }
+
+.admin-panel .bg-info {
+	position: relative;
+}
+
+.admin-panel .bg-info form button {
+	display: inline-block;
+	float: right;
+	position: absolute;
+	top: 10px;
+	right: 15px;
+}

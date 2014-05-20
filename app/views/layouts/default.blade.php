@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Custom CMS</title>
-  {{ HTML::style( 'css/bootstrap.min.css' ) }}
-  {{ HTML::style( 'css/main.css' ) }}
-  {{ HTML::script( 'js/jquery.min.js' ) }}
-  {{ HTML::script( 'js/jquery-migrate.min.js' ) }}
-  {{ HTML::script( 'js/bootstrap.min.js' ) }}
-  <meta name="csrf-token" content="{{  csrf_token() }}" />
+	<title>Custom CMS</title>
+	{{ HTML::style( 'css/bootstrap.min.css' ) }}
+	{{ HTML::style( 'css/main.css' ) }}
+	{{ HTML::script( 'js/jquery.min.js' ) }}
+	{{ HTML::script( 'js/jquery-migrate.min.js' ) }}
+	{{ HTML::script( 'js/jquery-ui.min.js' ) }}
+	{{ HTML::script( 'js/bootstrap.min.js' ) }}
+	<meta name="csrf-token" content="{{  csrf_token() }}" />
 </head>
 <body>
 
 @yield( 'main' )
 
+	{{ HTML::script( 'js/jquery.nestedsortable.js' ) }}
+	{{ HTML::script( 'js/shared/custom_sortable.js' ) }}
 </body>
 </html>

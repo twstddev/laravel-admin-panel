@@ -1,7 +1,7 @@
 <?php
 namespace Admin;
 
-class MenuItemController extends \BaseController {
+class MenuItemController extends AdminController {
 
 	/**
 	 * Display a listing of the resource.
@@ -10,9 +10,9 @@ class MenuItemController extends \BaseController {
 	 */
 	public function index()
 	{
-		$menu_items = \MenuItem::orderBy( 'position', 'ASC' )->get();
+		$menu_items = \MenuItem::whereParentId( null )->orderBy( 'position', 'ASC' )->get();
 
-		return \View::make( 'admin.menu_items.index' )
+		$this->layout->content =  \View::make( 'admin.menu_items.index' )
 			->with( 'menu_items', $menu_items );
 	}
 

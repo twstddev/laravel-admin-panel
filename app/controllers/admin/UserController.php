@@ -112,8 +112,10 @@ class UserController extends AdminController {
 	 */
 	public function destroy($id)
 	{
-		$user = \User::find( $id );
-		$user->delete();
+		if ( \Auth::user()->id != $id ) {
+			$user = \User::find( $id );
+			$user->delete();
+		}
 
 		\Session::flash( 'success', 'User has been deleted.' );
 		return \Redirect::route( 'admin.users.index' );
