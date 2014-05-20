@@ -47,7 +47,7 @@ class Page extends Ardent implements SluggableInterface {
 
 	public static $rules = array(
 		'title' => 'required',
-		'slug' => 'required',
+		'slug' => 'required|unique:pages',
 		'template' => 'template'
 	);
 
@@ -63,6 +63,8 @@ class Page extends Ardent implements SluggableInterface {
 		'build_from' => 'title',
 		'save_to' => 'slug'
 	);
+
+	protected $table = 'pages';
 
 	use SluggableTrait;
 }

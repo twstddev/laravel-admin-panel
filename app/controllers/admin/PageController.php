@@ -86,8 +86,9 @@ class PageController extends AdminController {
 	public function update($id)
 	{
 		$page = \Page::find( $id );
+		$page->fill( \Input::all() );
 
-		if ( $page->update( \Input::all() ) ) {
+		if ( $page->updateUniques() ) {
 			\Session::flash( 'success', 'A page has been updated.' );
 			return \Redirect::route( 'admin.pages.edit', array( $id ) );
 		}

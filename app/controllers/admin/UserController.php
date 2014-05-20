@@ -26,8 +26,9 @@ class UserController extends AdminController {
 	{
 		$user = new \User();
 
-		return \View::make( 'admin.users.create' )
-			->with( 'user', $user );
+		$this->layout->content = \View::make( 'admin.users.create' )
+			->with( 'user', $user )
+			->with( 'roles', $this->getRolesList() );
 	}
 
 
@@ -46,7 +47,7 @@ class UserController extends AdminController {
 		}
 		else {
 			return \Redirect::route( 'admin.users.create' )
-				->withErrors( $user )
+				->withErrors( $user->errors() )
 				->withInput();
 		}
 	}
@@ -74,8 +75,9 @@ class UserController extends AdminController {
 	{
 		$user = \User::find( $id );
 
-		return \View::make( 'admin.users.edit' )
-			->with( 'user', $user );
+		$this->layout->content = \View::make( 'admin.users.edit' )
+			->with( 'user', $user )
+			->with( 'roles', $this->getRolesList() );
 	}
 
 
@@ -88,14 +90,15 @@ class UserController extends AdminController {
 	public function update($id)
 	{
 		$user = \User::find( $id );
+		$user->fill( \Input::all() );
 
-		if ( $user->update( \Input::all() ) ) {
+		if ( $user->updateUniques() ) {
 			\Session::flash( 'success', 'User has been updated.' );
 			return \Redirect::route( 'admin.users.index' );
 		}
 		else {
 			return \Redirect::route( 'admin.users.edit', array( $id ) )
-				->withErrors( $user )
+				->withErrors( $user->errors() )
 				->withInput();
 		}
 	}
@@ -116,5 +119,21 @@ class UserController extends AdminController {
 		return \Redirect::route( 'admin.users.index' );
 	}
 
+
+	/**
+	 * @brief Prepares a list of roles
+	 * that match the default drop down markdown.
+	 */
+	private function getRolesList() {
+		$roles = \Role::all();
+
+		$roles_list = array();
+
+		foreach ( $roles as $role ) {
+			$roles_list[ $role->id ] = $role->name;
+		}
+
+		return $roles_list;
+	}
 
 }
