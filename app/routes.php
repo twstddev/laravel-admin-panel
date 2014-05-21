@@ -70,8 +70,9 @@ Route::delete( 'logout', array(
 ) );
 
 Route::group( array( 'before' => 'auth' ), function() {
-	\Route::get( 'elfinder', 'Barryvdh\Elfinder\ElfinderController@showIndex' );
-	\Route::any( 'elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector' );
+	Route::get( 'elfinder', 'Barryvdh\Elfinder\ElfinderController@showIndex' );
+	Route::any( 'elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector' );
+	Route::get( 'elfinder/tinymce', 'Barryvdh\Elfinder\ElfinderController@showTinyMCE4' );
 } );
 
-Route::when( '*', 'csrf', array( 'post' ) );
+Route::when( 'admin/*', 'csrf', array( 'post' ) );
