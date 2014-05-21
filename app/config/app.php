@@ -121,6 +121,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Cviebrock\EloquentSluggable\SluggableServiceProvider',
+		'Barryvdh\Elfinder\ElfinderServiceProvider'
 	),
 
 	/*

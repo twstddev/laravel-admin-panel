@@ -69,4 +69,9 @@ Route::delete( 'logout', array(
 	'as' => 'logout'
 ) );
 
+Route::group( array( 'before' => 'auth' ), function() {
+	\Route::get( 'elfinder', 'Barryvdh\Elfinder\ElfinderController@showIndex' );
+	\Route::any( 'elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector' );
+} );
+
 Route::when( '*', 'csrf', array( 'post' ) );
