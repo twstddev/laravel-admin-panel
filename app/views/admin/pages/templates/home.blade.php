@@ -3,7 +3,7 @@ $slide_form = View::make( 'admin.pages.templates.form.slide', array(
 	'namespace' => 'meta[slider][NEW_SLIDER]',
 	'values' => array( 
 		'title' => '',
-		'summary' => ''
+		'image' => ''
    	)
 ) );
 

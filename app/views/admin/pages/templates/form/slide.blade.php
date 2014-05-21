@@ -4,8 +4,8 @@
 		{{ Form::text( $namespace . '[title]', $values[ 'title' ], array( 'class' => 'form-control' ) ) }}
 	</div>
 	<div class="form-group">
-		{{ Form::label( 'summary', 'Summary:' ) }}
-		{{ Form::textarea( $namespace . '[summary]', $values[ 'summary' ], array( 'class' => 'form-control rich-editor' ) ) }}
+		{{ Form::label( 'image', 'Image:' ) }}
+		{{ Form::picker( $namespace . '[image]', $values[ 'image' ] ) }}
 	</div>
 	{{ link_to( '#', 'Remove slide', array( 'class' => 'btn btn-danger has-many-remove' ) ) }}
 </fieldset>

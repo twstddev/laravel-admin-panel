@@ -18,6 +18,7 @@
 	{{ HTML::script( 'js/shared/custom_sortable.js' ) }}
 	{{ HTML::script( 'js/tinymce/tinymce.min.js' ) }}
 	{{ HTML::script( 'js/shared/has_many_meta.js' ) }}
+	{{ HTML::script( 'packages/barryvdh/laravel-elfinder/js/elfinder.min.js' ) }}
 	{{ HTML::script( 'js/shared/admin.js' ) }}
 </body>
 </html>
