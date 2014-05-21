@@ -84,8 +84,13 @@ class PageController extends AdminController {
 	public function edit($id)
 	{
 		$page = \Page::find( $id );
+
+		$view_data = array(
+			'page' => $page
+		);
+
 		$this->layout->content =  \View::make( 'admin.pages.edit' )
-			->with( 'page', $page );
+			->with( $view_data );
 	}
 
 
@@ -98,7 +103,17 @@ class PageController extends AdminController {
 	public function update($id)
 	{
 		$page = \Page::find( $id );
-		$page->fill( \Input::all() );
+
+		$input_data = \Input::all();
+
+		$page->fill( $input_data );
+
+		if ( isset( $input_data[ 'meta' ] ) ) {
+			$page->meta = $input_data[ 'meta' ];
+		}
+		else {
+			$page->meta = "";
+		}
 
 		if ( $page->updateUniques() ) {
 			\Session::flash( 'success', 'A page has been updated.' );

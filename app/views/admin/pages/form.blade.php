@@ -29,6 +29,9 @@
 					{{ Form::textarea( 'body', null, array( 'class' => 'form-control rich-editor', 'rows' => 15 ) ) }}
 				</div>
 				<h3>Extra</h3>
+				@if ( $page->template )
+					@include( 'admin.pages.templates.' . $page->template )
+				@endif
 			</div>
 			<aside class="col-lg-3">
 				<div class="panel panel-default">
