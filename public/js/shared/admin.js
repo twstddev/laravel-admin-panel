@@ -87,11 +87,15 @@
 			$browser = $( "<div>", { className : "file-manager" } );
 
 			$modal.find( ".modal-body" ).append( $browser );
+
 			$browser.elfinder( {
 				connector : "/elfinder/connector",
 				url : "/elfinder/connector",
 				height: 800,
-				getFileCallback : file_callback
+				getFileCallback : function( file ) {
+					$modal.modal( "hide" );
+					file_callback( file );
+				}
 			} );
 			$modal.modal( "show" );
 		}
@@ -110,7 +114,7 @@
 
 				createModal( function( file ) {
 					$this.parent().siblings( "input" ).val( file.url );
-					$( modal_selector ).modal( { show : false } );
+					//$( modal_selector ).modal( { show : false } );
 				} );
 
 				return false;
