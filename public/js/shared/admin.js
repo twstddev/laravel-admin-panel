@@ -80,7 +80,7 @@
 		/**
 		 * @brief Creates a modal with file manager inside.
 		 */
-		var createModal = function() {
+		var createModal = function( file_callback ) {
 			var $modal = $( m_modal_template );
 			$( "body" ).append( $modal );
 
@@ -88,7 +88,10 @@
 
 			$modal.find( ".modal-body" ).append( $browser );
 			$browser.elfinder( {
-				connector : "/elfinder/connector"
+				connector : "/elfinder/connector",
+				url : "/elfinder/connector",
+				height: 800,
+				getFileCallback : file_callback
 			} );
 			$modal.modal( "show" );
 		}
@@ -99,9 +102,16 @@
 		var listenToPickers = function() {
 			$( document ).on( "click", m_selector + " .btn", function( event ) {
 				event.preventDefault();
-				$( "." + m_modal_class ).remove();
+				var modal_selector = "." + m_modal_class;
 
-				createModal();
+				$( modal_selector ).remove();
+				
+				var $this = $( this );
+
+				createModal( function( file ) {
+					$this.parent().siblings( "input" ).val( file.url );
+					$( modal_selector ).modal( { show : false } );
+				} );
 
 				return false;
 			} );

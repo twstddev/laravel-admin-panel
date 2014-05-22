@@ -4,6 +4,9 @@
 	<title>Custom CMS</title>
 	{{ HTML::style( 'css/bootstrap.min.css' ) }}
 	{{ HTML::style( 'css/main.css' ) }}
+	{{ HTML::style( 'packages/barryvdh/laravel-elfinder/css/elfinder.min.css' ) }}
+	{{ HTML::style( 'packages/barryvdh/laravel-elfinder/css/theme.css' ) }}
+	{{ HTML::style( 'css/jquery-ui.min.css' ) }}
 	{{ HTML::script( 'js/jquery.min.js' ) }}
 	{{ HTML::script( 'js/jquery-migrate.min.js' ) }}
 	{{ HTML::script( 'js/jquery-ui.min.js' ) }}
